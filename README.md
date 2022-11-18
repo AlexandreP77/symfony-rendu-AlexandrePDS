@@ -16,7 +16,7 @@
 #pour le css
 7 - faire la commande dans le powershell ->  npm run watch 
 
-8 - et pour Lancer le Serv faire la commande dans le powershell -> symfony server:start ou  symfony server:d   
+8 - et pour Lancer le Serv faire la commande dans le powershell -> symfony server:start ou  symfony serve -d  
 
 
 Cordialement -> Le dit bidon
