@@ -3,9 +3,12 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
 
-    <table class="table">
+
+	<div class="card">
+		<div class="card-body">
+			<h2 class="card-title">Articles</h2>
+			<table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -45,7 +48,10 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
+        </div>
     {% if is_granted('ROLE_USER') %}
-    <a href="{{ path('app_article_new') }}">Create new</a>
+    <button class="btn btn-primary w-25 stroke-yellow-50" ><a href="{{ path('app_article_new') }}">Créer</a></button>
+
     {% endif %}
 {% endblock %}

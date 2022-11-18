@@ -5,7 +5,10 @@
 {% block body %}
     <h1>User index</h1>
 
-    <table class="table">
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">Vos articles</h5>
+			<table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -39,4 +42,6 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
+     </div>
 {% endblock %}

@@ -1,51 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}Article
+{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ article.description }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ article.contenu }}</td>
-            </tr>
-            <tr>
-                <th>Datedecreation</th>
-                <td>{{ article.datedecreation ? article.datedecreation|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Auteur</th>
-                <td><a href="/user/{{article.user.id}}">{{article.user.nom}}</a></td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td>{{ article.statut }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="card">
+		<div class="card-body">
+			<h2 class="card-title">Articles</h2>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th scope="row">ID</th>
+						<td>{{ article.id }}</td>
+					</tr>
+					<tr>
+						<th scope="row">Titre</th>
+						<td>{{ article.titre }}</td>
+					</tr>
+					<tr>
+						<th scope="row">Description</th>
+						<td>{{ article.description }}</td>
+					</tr>
+					<tr>
+						<th scope="row">Contenu</th>
+						<td>{{ article.contenu }}</td>
+					</tr>
+					<tr>
+						<th scope="row">Date Création</th>
+						<td>{{ article.datedecreation ? article.datedecreation|date('Y-m-d') : '' }}</td>
+					</tr>
 
-    <a href="{{ path('app_article_index') }}">back to list</a>
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+					<tr>
+						<th scope="row">Auteur</th>
+						<a href="/user/{{article.user.id}}">{{article.user.nom}}</a>
+					</tr>
 
-        {{ include('article/_delete_form.html.twig') }}
-    {% elseif article.user == app.user %}
-        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+					<tr>
+						<th scope="row">Statut</th>
+						<td>{{ article.statut }}</td>
+					</tr>
 
-        {{ include('article/_delete_form.html.twig') }}
-    {% endif %}
+					<tr>
+						<th scope="row">Actions</th>
+						<td>
+							<a href="{{ path('app_article_index') }}">Retour/</a>
+							{% if is_granted('ROLE_ADMIN') %}
+								
+                                <a href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+
+								{{ include('article/_delete_form.html.twig') }}
+							
+                            {% elseif article.user == app.user %}
+								
+                                <a href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+
+                                {{ include('article/_delete_form.html.twig') }}
+
+							{% endif %}
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
 {% endblock %}
