@@ -1,0 +1,30 @@
+{% block body %}
+    <ul class="flex">
+       <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="{{ path('app_article_lastarticle') }}">aceuil</a>
+        </li>
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="{{ path('app_article_index') }}">article</a>
+        </li>
+        {% if is_granted('ROLE_USER') %}
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="{{ path('app_article_new') }}">new article</a>
+        </li>
+        {% endif %}
+        {% if app.user %}
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="{{ path('app_logout') }}">Logout</a>
+        </li>
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="{{ path('app_profil') }}">Bienvenue {{app.user.nom}} {{app.user.prenom}}</a>
+        </li>
+        {% else %}
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="{{ path('app_login') }}">Login</a>
+        </li>
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="{{ path('app_register') }}">register</a>
+        </li>
+    {% endif %}
+    </ul>
+{% endblock %}

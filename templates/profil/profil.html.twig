@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <h1>Profil</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if app.user %}
+            <tr>
+                <td>{{ app.user.email }}</td>
+                <td>{{ app.user.roles ? app.user.roles|json_encode : '' }}</td>
+                <td>{{ app.user.nom }}</td>
+                <td>{{ app.user.prenom }}</td>
+                <td>
+                    <a href="{{ path('app_profil_edit') }}">edit</a>
+                    <a href="{{ path('app_profil_delete') }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ dump(users) }}
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>Article index</h1>
+    {% else %}
+        <h1>Vos Article</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Contenu</th>
+                <th>Datedecreation</th>
+                <th>Auteur</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.description }}</td>
+                <td>{{ article.contenu }}</td>
+                <td>{{ article.datedecreation ? article.datedecreation|date('Y-m-d') : '' }}</td>
+                <td>{{article.user.nom}}</td>
+                <td>{{ article.statut }}</td>
+                <td>
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    <a href="{{ path('app_article_new') }}">Create new</a>
+{% endblock %}

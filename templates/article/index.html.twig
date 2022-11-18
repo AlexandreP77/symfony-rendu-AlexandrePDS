@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Article index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Contenu</th>
+                <th>Datedecreation</th>
+                <th>Auteur</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.description }}</td>
+                <td>{{ article.contenu }}</td>
+                <td>{{ article.datedecreation ? article.datedecreation|date('Y-m-d') : '' }}</td>
+                <td><a href="/user/{{article.user.id}}">{{article.user.nom}}</a></td>
+                <td>{{ article.statut }}</td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                    {% elseif article.user == app.user %}
+                        <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_USER') %}
+    <a href="{{ path('app_article_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}
