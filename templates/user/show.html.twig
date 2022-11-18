@@ -5,34 +5,36 @@
 {% block body %}
     <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
+<div class="overflow-x-auto relative">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <tbody class="ext-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th>Id</th>
                 <td>{{ user.id }}</td>
             </tr>
-            <tr>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
-            <tr>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
-            <tr>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th>Password</th>
                 <td>{{ user.password }}</td>
             </tr>
-            <tr>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th>Nom</th>
                 <td>{{ user.nom }}</td>
             </tr>
-            <tr>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th>Prenom</th>
                 <td>{{ user.prenom }}</td>
             </tr>
         </tbody>
     </table>
+    </div>
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 

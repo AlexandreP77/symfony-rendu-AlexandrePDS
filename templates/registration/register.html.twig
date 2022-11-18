@@ -3,9 +3,18 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
+<section>
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 dark:bg-gray-900">
+      
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-center text-x font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Créer un compte
+              </h1>
+
+        <div class="space-y-4 md:space-y-6 ">
+        {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.prenom) }}
         {{ form_row(registrationForm.nom) }}
         {{ form_row(registrationForm.email) }}
@@ -14,6 +23,24 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+
+
+        <button type="submit" class="w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">S'enregistrer</button>
+                    
+        <p class="text-center">
+             Vous avez déjà un compte ? <a href="{{path('app_login')}}" class="">Connexion</a>
+        </p>
+
+
+        {{ form_end(registrationForm) }}
+        </div>
+
+      </div>
+  </div>
+  </div>
+</section>
 {% endblock %}
+
+
+
+
